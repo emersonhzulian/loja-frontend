@@ -1,10 +1,4 @@
-import {
-  Link,
-  useLoaderData,
-  Form,
-  redirect,
-  useSearchParams,
-} from "react-router-dom";
+import { Link, useLoaderData, Form, redirect } from "react-router-dom";
 import { Api } from "../apiClient/Api";
 import {
   ClientDTO,

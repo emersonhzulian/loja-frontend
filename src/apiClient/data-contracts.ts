@@ -59,6 +59,7 @@ export interface OrderDTO {
   id?: number;
   /** @format int32 */
   clientId?: number;
+  clientName?: string | null;
   /** @format int32 */
   userId?: number;
   orderStatus?: EnumOrderStatus;
