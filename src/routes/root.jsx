@@ -14,10 +14,17 @@ export function Root() {
         <nav>
           <ul>
             <li>
-              <Link to={`comandas`}>Loja</Link>
+              <Link to={`comandas`}>Comandas abertas</Link>
+            </li>
+            <li>
+              <Link to={`comandas-historico`}>Comandas historico</Link>
             </li>
             <li>
               <Link to={`cozinha`}>Cozinha</Link>
+            </li>
+
+            <li>
+              <Link to={`produtos`}>produtos</Link>
             </li>
           </ul>
         </nav>

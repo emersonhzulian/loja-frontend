@@ -5,15 +5,26 @@ import { Root, loader as rootLoader } from "./routes/root";
 import ErrorPage from "./error-page";
 import {
   loader as ordersLoader,
-  createOrder,
+  action as ordersAction,
   Orders,
 } from "./routes/orders.tsx";
 import Kitchen from "./routes/kitchen.tsx";
 import {
-  editOrder,
   Order,
   loader as orderLoader,
-} from "./components/order.tsx";
+  action as orderAction,
+} from "./routes/order.tsx";
+import {
+  OrdersHistory,
+  loader as ordersHistoryLoader,
+} from "./routes/orders-history.tsx";
+import "./index.css";
+import { Products, loader as productsLoader } from "./routes/products.tsx";
+import {
+  Product,
+  loader as productLoader,
+  action as productAction,
+} from "./routes/product.tsx";
 
 const router = createBrowserRouter([
   {
@@ -26,13 +37,30 @@ const router = createBrowserRouter([
         path: "comandas",
         element: <Orders />,
         loader: ordersLoader,
-        action: createOrder,
+        action: ordersAction,
       },
       {
         path: "comandas/:comandaId",
         element: <Order />,
         loader: orderLoader,
-        action: editOrder,
+        action: orderAction,
+      },
+      {
+        path: "produtos",
+        element: <Products />,
+        loader: productsLoader,
+      },
+      {
+        path: "produtos/:produtoId",
+        element: <Product />,
+        loader: productLoader,
+        action: productAction,
+      },
+
+      {
+        path: "comandas-historico",
+        element: <OrdersHistory />,
+        loader: ordersHistoryLoader,
       },
       {
         path: "cozinha",

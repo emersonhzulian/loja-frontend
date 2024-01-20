@@ -1,0 +1,2 @@
+
+npx swagger-typescript-api -p http://127.0.0.1:5000/api/v1/swagger.json -o ./src/apiClient --modular    

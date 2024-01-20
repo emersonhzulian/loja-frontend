@@ -1,10 +1,9 @@
 import {
-  Outlet,
   Link,
   useLoaderData,
   Form,
   redirect,
-  useLocation,
+  useSearchParams,
 } from "react-router-dom";
 import { Api } from "../apiClient/Api";
 import {
@@ -12,7 +11,7 @@ import {
   EnumOrderStatus,
   OrderDTO,
 } from "../apiClient/data-contracts";
-import { EnumOrderStatusDescription } from "../apiClient/enum-descriptions";
+import { OrderComponent } from "../components/orderComponent";
 
 export async function loader(): Promise<{
   orders: OrderDTO[];
@@ -26,13 +25,11 @@ export async function loader(): Promise<{
   return { orders, clients };
 }
 
-export async function createOrder({ request, params }) {
+export async function action({ request, params }) {
   const formData = await request.formData();
   const updates = Object.fromEntries(formData);
 
-  const api = Api.Instance;
-  await api.ordersCreate({ clientId: 1, userId: updates.clientId });
-  return redirect(`/comandas`);
+  return redirect(`/comandas/0?cliente=${updates.clientId}`);
 }
 
 export function Orders() {
@@ -47,20 +44,19 @@ export function Orders() {
       <br></br>
       {data.orders.map((order) => (
         <div key={order.id}>
-          Comanda: {order.id}
-          <br></br>
-          Cliente: {data.clients.find((x) => x.id == order.clientId)?.name}
-          <br></br>
-          Horário: {order.createdAt}
-          <br></br>
-          Status da comanda: {EnumOrderStatusDescription(order.orderStatus)}
-          <br></br>
+          <OrderComponent
+            order={order}
+            client={
+              data.clients.find((x) => x.id == order.clientId) as ClientDTO
+            }
+          />
           <Link to={`/comandas/${order.id}`}>Editar</Link>
+          <Link to={`/comandas/${order.id}`}>Colocar produto</Link>
           <br></br>
           <br></br>
         </div>
       ))}
-      <div>Criar uma Comanda</div>
+
       <Form method="post" id="order-form">
         <select name="clientId">
           {data.clients.map((client) => (
