@@ -1,7 +1,7 @@
 import { Link, useLoaderData } from "react-router-dom";
-import { Api } from "../apiClient/Api";
-import { ProductDTO } from "../apiClient/data-contracts";
-import { ProductComponent } from "../components/productComponent";
+import { Api } from "../../apiClient/Api";
+import { ProductDTO } from "../../apiClient/data-contracts";
+import { ProductComponent } from "../../components/product/productComponent";
 
 export async function loader(): Promise<ProductDTO[]> {
   const api = Api.Instance;
@@ -27,7 +27,7 @@ export function Products() {
       ))}
 
       <div>Criar um produto</div>
-      <Link to={`/produtos/0`}>Criar</Link>
+      <Link to={`/produtos/criar`}>Criar</Link>
     </>
   );
 }

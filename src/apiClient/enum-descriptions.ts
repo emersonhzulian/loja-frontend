@@ -39,7 +39,7 @@ export function EnumProductTypeDescription(
 ): string {
   switch (entry) {
     case EnumProductType.Store:
-      return "Produto";
+      return "Loja";
     case EnumProductType.Kitchen:
       return "Cozinha";
     default:

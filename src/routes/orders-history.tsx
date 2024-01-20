@@ -2,7 +2,7 @@ import { Link, useLoaderData, Form, redirect } from "react-router-dom";
 import { Api } from "../apiClient/Api";
 import { ClientDTO, OrderDTO } from "../apiClient/data-contracts";
 import { EnumOrderStatusDescription } from "../apiClient/enum-descriptions";
-import { OrderComponent } from "../components/orderComponent";
+import { OrderComponent } from "../components/order/orderComponent";
 
 export async function loader(): Promise<{
   orders: OrderDTO[];
@@ -25,12 +25,7 @@ export function OrdersHistory() {
       <br></br>
       {data.orders.map((order) => (
         <>
-          <OrderComponent
-            order={order}
-            client={
-              data.clients.find((x) => x.id == order.clientId) as ClientDTO
-            }
-          />
+          <OrderComponent order={order} />
           <Link to={`/comandas/${order.id}`}>Editar</Link>
           <br></br>
           <br></br>

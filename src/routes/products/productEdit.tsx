@@ -1,19 +1,13 @@
 import { useLoaderData, Form, redirect } from "react-router-dom";
-import { Api } from "../apiClient/Api";
-import { ProductDTO } from "../apiClient/data-contracts";
-import { ProductComponent } from "../components/productComponent";
+import { Api } from "../../apiClient/Api";
+import { ProductDTO } from "../../apiClient/data-contracts";
+import { ProductComponent } from "../../components/product/productComponent";
+import { ProductEditComponent } from "../../components/product/productEditComponent";
 
 export async function loader({ params }): Promise<ProductDTO> {
   const productId = params.produtoId;
-  let product: ProductDTO = {
-    id: 0,
-  };
-
-  if (productId && productId != 0) {
-    const api = Api.Instance;
-    product = (await api.productsDetail(productId)).data;
-  }
-
+  const api = Api.Instance;
+  const product = (await api.productsDetail(productId)).data;
   return product;
 }
 
@@ -26,16 +20,12 @@ export async function action({ request, params }) {
   updatedEntity.productType = Number(updates.productType);
 
   const api = Api.Instance;
-  if (updatedEntity.id) {
-    await api.productsUpdate(updatedEntity.id ?? 0, updatedEntity);
-  } else {
-    updatedEntity = (await api.productsCreate(updatedEntity)).data;
-  }
+  await api.productsUpdate(updatedEntity.id ?? 0, updatedEntity);
 
   return redirect(`/produtos/${updatedEntity.id}`);
 }
 
-export function Product() {
+export function ProductEdit() {
   const product = useLoaderData() as ProductDTO;
 
   return (
@@ -47,9 +37,9 @@ export function Product() {
           name="oldEntity"
         ></input>
         <br></br>
-        <ProductComponent product={product} editable={true} />
+        <ProductEditComponent product={product} />
         <br></br>
-        <button type="submit">{product.id != 0 ? "Editar" : "Criar"}</button>
+        <button type="submit">Editar</button>
       </Form>
     </>
   );

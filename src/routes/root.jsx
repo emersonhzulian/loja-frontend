@@ -22,7 +22,6 @@ export function Root() {
             <li>
               <Link to={`cozinha`}>Cozinha</Link>
             </li>
-
             <li>
               <Link to={`produtos`}>produtos</Link>
             </li>

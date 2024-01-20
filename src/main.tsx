@@ -3,28 +3,42 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Root, loader as rootLoader } from "./routes/root";
 import ErrorPage from "./error-page";
-import {
-  loader as ordersLoader,
-  action as ordersAction,
-  Orders,
-} from "./routes/orders.tsx";
+import { loader as ordersLoader, Orders } from "./routes/orders/orders.tsx";
 import Kitchen from "./routes/kitchen.tsx";
 import {
-  Order,
-  loader as orderLoader,
-  action as orderAction,
-} from "./routes/order.tsx";
+  OrderCreate,
+  loader as orderCreateLoader,
+  action as orderCreateAction,
+} from "./routes/orders/orderCreate.tsx";
 import {
   OrdersHistory,
   loader as ordersHistoryLoader,
 } from "./routes/orders-history.tsx";
 import "./index.css";
-import { Products, loader as productsLoader } from "./routes/products.tsx";
 import {
-  Product,
-  loader as productLoader,
-  action as productAction,
-} from "./routes/product.tsx";
+  Products,
+  loader as productsLoader,
+} from "./routes/products/products.tsx";
+import {
+  loader as productEditLoader,
+  action as productEditAction,
+  ProductEdit,
+} from "./routes/products/productEdit.tsx";
+import { Product } from "./routes/products/Product.tsx";
+import {
+  OrderProducts,
+  loader as orderProductsLoader,
+  action as orderProductsAction,
+} from "./routes/orderProducts/orderProducts.tsx";
+import {
+  OrderEdit,
+  loader as orderEditLoader,
+  action as orderEditAction,
+} from "./routes/orders/orderEdit.tsx";
+import {
+  ProductCreate,
+  action as productCreateAction,
+} from "./routes/products/productCreate.tsx";
 
 const router = createBrowserRouter([
   {
@@ -34,16 +48,16 @@ const router = createBrowserRouter([
     loader: rootLoader,
     children: [
       {
+        path: "comandas/:comandaId/produtos",
+        element: <OrderProducts />,
+        loader: orderProductsLoader,
+        action: orderProductsAction,
+      },
+
+      {
         path: "comandas",
         element: <Orders />,
         loader: ordersLoader,
-        action: ordersAction,
-      },
-      {
-        path: "comandas/:comandaId",
-        element: <Order />,
-        loader: orderLoader,
-        action: orderAction,
       },
       {
         path: "produtos",
@@ -51,12 +65,28 @@ const router = createBrowserRouter([
         loader: productsLoader,
       },
       {
-        path: "produtos/:produtoId",
-        element: <Product />,
-        loader: productLoader,
-        action: productAction,
+        path: "comandas/criar",
+        element: <OrderCreate />,
+        loader: orderCreateLoader,
+        action: orderCreateAction,
       },
-
+      {
+        path: "comandas/:comandaId",
+        element: <OrderEdit />,
+        loader: orderEditLoader,
+        action: orderEditAction,
+      },
+      {
+        path: "produtos/criar",
+        element: <ProductCreate />,
+        action: productCreateAction,
+      },
+      {
+        path: "produtos/:produtoId",
+        element: <ProductEdit />,
+        loader: productEditLoader,
+        action: productEditAction,
+      },
       {
         path: "comandas-historico",
         element: <OrdersHistory />,
