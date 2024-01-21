@@ -1,11 +1,8 @@
-import { Outlet, Link, useLoaderData } from "react-router-dom";
-
-export async function loader() {
-  return { dados: { dados: 0 } };
-}
+import { Outlet, Link, useNavigation } from "react-router-dom";
 
 export function Root() {
-  const { dados } = useLoaderData();
+  const navigation = useNavigation();
+
   return (
     <>
       <div id="sidebar">
@@ -30,7 +27,10 @@ export function Root() {
 
         {/* other elements */}
       </div>
-      <div id="detail">
+      <div
+        id="detail"
+        className={navigation.state === "loading" ? "loading" : ""}
+      >
         <Outlet />
       </div>
     </>

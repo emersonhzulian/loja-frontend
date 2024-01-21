@@ -32,8 +32,7 @@ export function Orders() {
         </div>
       ))}
 
-      <div>Criar uma Comanda</div>
-      <Link to={`/comandas/criar`}>Criar</Link>
+      <Link to={`/comandas/criar`}>Criar Comanda</Link>
     </>
   );
 }

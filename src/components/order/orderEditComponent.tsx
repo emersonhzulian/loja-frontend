@@ -8,7 +8,7 @@ export function OrderEditComponent({ order }: { order: OrderDTO }) {
         Número da Comanda: {order.id}
         <br></br>
         <input type="hidden" value={order.clientId} name="clientId"></input>
-        Cliente: {order.clientName}
+        Cliente: {order.client?.name}
         <br></br>
         Horário: ${order.createdAt}
         <br></br>

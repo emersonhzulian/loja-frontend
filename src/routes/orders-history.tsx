@@ -24,12 +24,12 @@ export function OrdersHistory() {
       <div>Comandas</div>
       <br></br>
       {data.orders.map((order) => (
-        <>
+        <div key={order.id}>
           <OrderComponent order={order} />
           <Link to={`/comandas/${order.id}`}>Editar</Link>
           <br></br>
           <br></br>
-        </>
+        </div>
       ))}
     </>
   );

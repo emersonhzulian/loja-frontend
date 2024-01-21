@@ -42,8 +42,7 @@ export interface KitchenOrderDTO {
   orderProductId?: number;
   kitchenOrderStatus?: EnumKitchenOrderStatus;
   description?: string | null;
-  order?: SimpleOrderDTO;
-  product?: SimpleProductDTO;
+  orderProduct?: OrderProductDTO;
   /** @format date-time */
   createdAt?: string;
 }
@@ -59,7 +58,7 @@ export interface OrderDTO {
   id?: number;
   /** @format int32 */
   clientId?: number;
-  clientName?: string | null;
+  client?: ClientDTO;
   /** @format int32 */
   userId?: number;
   orderStatus?: EnumOrderStatus;
@@ -74,6 +73,8 @@ export interface OrderProductDTO {
   productId?: number;
   /** @format int32 */
   orderId?: number;
+  order?: OrderDTO;
+  product?: ProductDTO;
   /** @format double */
   price?: number;
   description?: string | null;
@@ -105,19 +106,6 @@ export interface ProductDTO {
 }
 
 export interface ProductType {
-  /** @format int32 */
-  id?: number;
-  description?: string | null;
-}
-
-export interface SimpleOrderDTO {
-  /** @format int32 */
-  id?: number;
-  /** @format int32 */
-  clientId?: number;
-}
-
-export interface SimpleProductDTO {
   /** @format int32 */
   id?: number;
   description?: string | null;

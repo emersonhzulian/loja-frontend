@@ -1,10 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Root, loader as rootLoader } from "./routes/root";
+import { Root } from "./routes/root";
 import ErrorPage from "./error-page";
 import { loader as ordersLoader, Orders } from "./routes/orders/orders.tsx";
-import Kitchen from "./routes/kitchen.tsx";
 import {
   OrderCreate,
   loader as orderCreateLoader,
@@ -24,11 +23,10 @@ import {
   action as productEditAction,
   ProductEdit,
 } from "./routes/products/productEdit.tsx";
-import { Product } from "./routes/products/Product.tsx";
 import {
   OrderProducts,
   loader as orderProductsLoader,
-  action as orderProductsAction,
+  actionDelete as orderProductsDelete,
 } from "./routes/orderProducts/orderProducts.tsx";
 import {
   OrderEdit,
@@ -39,21 +37,37 @@ import {
   ProductCreate,
   action as productCreateAction,
 } from "./routes/products/productCreate.tsx";
+import {
+  OrderProductCreate,
+  loader as orderProductCreateLoader,
+  action as orderProductCreateAction,
+} from "./routes/orderProducts/orderProductCreate.tsx";
+import {
+  KitchenOrders,
+  loader as kitchenOrdersLoader,
+} from "./routes/kitchenOrders/kitchenOrders.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
     errorElement: <ErrorPage />,
-    loader: rootLoader,
     children: [
+      {
+        path: "comandas/:comandaId/produtos/criar",
+        element: <OrderProductCreate />,
+        loader: orderProductCreateLoader,
+        action: orderProductCreateAction,
+      },
+      {
+        path: "comandas/:comandaId/produtos/:orderProductId/deletar",
+        action: orderProductsDelete,
+      },
       {
         path: "comandas/:comandaId/produtos",
         element: <OrderProducts />,
         loader: orderProductsLoader,
-        action: orderProductsAction,
       },
-
       {
         path: "comandas",
         element: <Orders />,
@@ -94,7 +108,8 @@ const router = createBrowserRouter([
       },
       {
         path: "cozinha",
-        element: <Kitchen />,
+        element: <KitchenOrders />,
+        loader: kitchenOrdersLoader,
       },
     ],
   },
