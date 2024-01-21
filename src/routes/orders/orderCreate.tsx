@@ -36,8 +36,6 @@ export function OrderCreate() {
   return (
     <>
       <Form method="post" id="order-form">
-        <input hidden value={"teste1"} name="careca"></input>
-        <input hidden value={"teste2"}></input>
         <OrderCreateComponent clients={clients} />
         <button type="submit">Criar</button>
       </Form>
