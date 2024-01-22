@@ -26,8 +26,6 @@ export function OrderProductComponent({
         ></input>
         Id da venda: {orderProduct.id}
         <br></br>
-        Descrição: {orderProduct.description}
-        <br></br>
         Produto: {orderProduct.product?.description}
         <br></br>
         Tipo Produto:{" "}
@@ -35,6 +33,9 @@ export function OrderProductComponent({
         <br></br>
         Preço: {orderProduct.price}
         <br></br>
+        {orderProduct.description
+          ? `Descrição: ${orderProduct.description} <br></br>`
+          : ""}
         Horário: {orderProduct.createdAt}
         <br></br>
         <br></br>

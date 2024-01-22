@@ -26,7 +26,7 @@ export function OrdersHistory() {
       {data.orders.map((order) => (
         <div key={order.id}>
           <OrderComponent order={order} />
-          <Link to={`/comandas/${order.id}`}>Editar</Link>
+          <Link to={`/comandas/${order.id}/editar`}>Editar</Link>
           <br></br>
           <br></br>
         </div>

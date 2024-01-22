@@ -6,6 +6,7 @@ import {
   OrderDTO,
 } from "../../apiClient/data-contracts";
 import { OrderCreateComponent } from "../../components/order/orderCreateComponent";
+import BackButton from "../../components/backButton";
 
 export async function loader({ request, params }): Promise<ClientDTO[]> {
   const api = Api.Instance;
@@ -38,6 +39,7 @@ export function OrderCreate() {
       <Form method="post" id="order-form">
         <OrderCreateComponent clients={clients} />
         <button type="submit">Criar</button>
+        <BackButton url="/comandas" />
       </Form>
     </>
   );

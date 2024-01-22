@@ -57,7 +57,7 @@ export function OrderProductCreateComponent({
         <input hidden readOnly name="productType" value={productType}></input>
         <br></br>
         <br></br>
-        Preço Sugerido:{" "}
+        Preço:{" "}
         <input
           type="text"
           name="price"

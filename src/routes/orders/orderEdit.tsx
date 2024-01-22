@@ -3,6 +3,7 @@ import { Api } from "../../apiClient/Api";
 import { OrderDTO } from "../../apiClient/data-contracts";
 import { OrderComponent } from "../../components/order/orderComponent";
 import { OrderEditComponent } from "../../components/order/orderEditComponent";
+import BackButton from "../../components/backButton";
 
 export async function loader({ params }): Promise<OrderDTO> {
   const orderId = params.comandaId;
@@ -20,7 +21,7 @@ export async function action({ request, params }) {
   const api = Api.Instance;
   await api.ordersUpdate(updatedEntity.id ?? 0, updatedEntity);
 
-  return redirect(`/comandas/${updatedEntity.id}`);
+  return redirect(`/comandas`);
 }
 
 export function OrderEdit() {
@@ -38,6 +39,7 @@ export function OrderEdit() {
         <OrderEditComponent order={order} />
 
         <button type="submit">Editar</button>
+        <BackButton url={`/comandas`} />
       </Form>
     </>
   );

@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Root } from "./routes/root";
 import ErrorPage from "./error-page";
-import { loader as ordersLoader, Orders } from "./routes/orders/orders.tsx";
 import {
   OrderCreate,
   loader as orderCreateLoader,
@@ -46,6 +45,19 @@ import {
   KitchenOrders,
   loader as kitchenOrdersLoader,
 } from "./routes/kitchenOrders/kitchenOrders.tsx";
+import { Order, loader as orderLoader } from "./routes/orders/order.tsx";
+import { Clients, loader as clientsLoader } from "./routes/clients/clients.tsx";
+import { Orders, loader as ordersLoader } from "./routes/orders/orders.tsx";
+import {
+  ClientCreate,
+  action as clientCreateAction,
+  loader as clientCreateLoader,
+} from "./routes/clients/clientCreate.tsx";
+import {
+  Client,
+  loader as clientLoader,
+  actionDelete as clientDeleteAction,
+} from "./routes/clients/client.tsx";
 
 const router = createBrowserRouter([
   {
@@ -54,29 +66,53 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "comandas/:comandaId/produtos/criar",
-        element: <OrderProductCreate />,
-        loader: orderProductCreateLoader,
-        action: orderProductCreateAction,
+        path: "clientes/:clienteId/deletar",
+        action: clientDeleteAction,
       },
       {
-        path: "comandas/:comandaId/produtos/:orderProductId/deletar",
-        action: orderProductsDelete,
+        path: "comandas/:comandaId",
+        element: <Order />,
+        loader: orderLoader,
+        children: [
+          {
+            path: "produtos",
+            element: <OrderProducts />,
+            loader: orderProductsLoader,
+          },
+          {
+            path: "produtos/criar",
+            element: <OrderProductCreate />,
+            loader: orderProductCreateLoader,
+            action: orderProductCreateAction,
+          },
+          {
+            path: "produtos/:orderProductId/deletar",
+            action: orderProductsDelete,
+          },
+        ],
       },
       {
-        path: "comandas/:comandaId/produtos",
-        element: <OrderProducts />,
-        loader: orderProductsLoader,
+        path: "clientes",
+        element: <Clients />,
+        loader: clientsLoader,
       },
+      {
+        path: "clientes/criar",
+        element: <ClientCreate />,
+        action: clientCreateAction,
+        loader: clientCreateLoader,
+      },
+
+      {
+        path: "clientes/:clienteId",
+        element: <Client />,
+        loader: clientLoader,
+      },
+
       {
         path: "comandas",
         element: <Orders />,
         loader: ordersLoader,
-      },
-      {
-        path: "produtos",
-        element: <Products />,
-        loader: productsLoader,
       },
       {
         path: "comandas/criar",
@@ -85,15 +121,20 @@ const router = createBrowserRouter([
         action: orderCreateAction,
       },
       {
-        path: "comandas/:comandaId",
-        element: <OrderEdit />,
-        loader: orderEditLoader,
-        action: orderEditAction,
+        path: "produtos",
+        element: <Products />,
+        loader: productsLoader,
       },
       {
         path: "produtos/criar",
         element: <ProductCreate />,
         action: productCreateAction,
+      },
+      {
+        path: "comandas/:comandaId/editar",
+        element: <OrderEdit />,
+        loader: orderEditLoader,
+        action: orderEditAction,
       },
       {
         path: "produtos/:produtoId",
