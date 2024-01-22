@@ -58,6 +58,11 @@ import {
   loader as clientLoader,
   actionDelete as clientDeleteAction,
 } from "./routes/clients/client.tsx";
+import {
+  KitchenOrderEdit,
+  loader as kitchenOrderEditLoader,
+  action as kitchenOrderEditAction,
+} from "./routes/kitchenOrders/kitchenOrderEdit.tsx";
 
 const router = createBrowserRouter([
   {
@@ -66,8 +71,21 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "clientes/:clienteId/deletar",
-        action: clientDeleteAction,
+        path: "comandas",
+        element: <Orders />,
+        loader: ordersLoader,
+      },
+      {
+        path: "comandas/criar",
+        element: <OrderCreate />,
+        loader: orderCreateLoader,
+        action: orderCreateAction,
+      },
+      {
+        path: "comandas/:comandaId/editar",
+        element: <OrderEdit />,
+        loader: orderEditLoader,
+        action: orderEditAction,
       },
       {
         path: "comandas/:comandaId",
@@ -102,23 +120,14 @@ const router = createBrowserRouter([
         action: clientCreateAction,
         loader: clientCreateLoader,
       },
-
       {
         path: "clientes/:clienteId",
         element: <Client />,
         loader: clientLoader,
       },
-
       {
-        path: "comandas",
-        element: <Orders />,
-        loader: ordersLoader,
-      },
-      {
-        path: "comandas/criar",
-        element: <OrderCreate />,
-        loader: orderCreateLoader,
-        action: orderCreateAction,
+        path: "clientes/:clienteId/deletar",
+        action: clientDeleteAction,
       },
       {
         path: "produtos",
@@ -130,12 +139,7 @@ const router = createBrowserRouter([
         element: <ProductCreate />,
         action: productCreateAction,
       },
-      {
-        path: "comandas/:comandaId/editar",
-        element: <OrderEdit />,
-        loader: orderEditLoader,
-        action: orderEditAction,
-      },
+
       {
         path: "produtos/:produtoId",
         element: <ProductEdit />,
@@ -143,14 +147,15 @@ const router = createBrowserRouter([
         action: productEditAction,
       },
       {
-        path: "comandas-historico",
-        element: <OrdersHistory />,
-        loader: ordersHistoryLoader,
-      },
-      {
-        path: "cozinha",
+        path: "pedidos",
         element: <KitchenOrders />,
         loader: kitchenOrdersLoader,
+      },
+      {
+        path: "pedidos/:pedidoId/editar",
+        element: <KitchenOrderEdit />,
+        loader: kitchenOrderEditLoader,
+        action: kitchenOrderEditAction,
       },
     ],
   },

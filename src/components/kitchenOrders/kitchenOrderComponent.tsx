@@ -1,5 +1,8 @@
 import { KitchenOrderDTO, OrderDTO } from "../../apiClient/data-contracts";
-import { EnumOrderStatusDescription } from "../../apiClient/enum-descriptions";
+import {
+  EnumKitchenOrderStatusDescription,
+  EnumOrderStatusDescription,
+} from "../../apiClient/enum-descriptions";
 
 export function KitchenOrderComponent({
   order: kitchenOrder,
@@ -11,9 +14,14 @@ export function KitchenOrderComponent({
       <div key={kitchenOrder.id}>
         Número da Comanda: {kitchenOrder.orderProduct?.order?.id}
         <br></br>
+        Cliente: {kitchenOrder.orderProduct?.order?.client?.name}
+        <br></br>
         Produto: {kitchenOrder.orderProduct?.product?.description}
         <br></br>
         Anotações: {kitchenOrder.description}
+        <br></br>
+        Status do Pedido:{" "}
+        {EnumKitchenOrderStatusDescription(kitchenOrder.kitchenOrderStatus)}
         <br></br>
       </div>
     </>

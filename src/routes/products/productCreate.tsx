@@ -17,7 +17,7 @@ export async function action({ request, params }) {
 
   updatedEntity = (await api.productsCreate(updatedEntity)).data;
 
-  return redirect(`/produtos/${updatedEntity.id}`);
+  return redirect(`/produtos`);
 }
 
 export function ProductCreate() {

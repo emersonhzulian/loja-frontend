@@ -26,7 +26,6 @@ export function Products() {
         </div>
       ))}
 
-      <div>Criar um produto</div>
       <Link to={`/produtos/criar`}>Criar</Link>
     </>
   );

@@ -1,4 +1,8 @@
 import { Outlet, Link, useNavigation } from "react-router-dom";
+import {
+  EnumKitchenOrderStatus,
+  EnumOrderStatus,
+} from "../apiClient/data-contracts";
 
 export function Root() {
   const navigation = useNavigation();
@@ -15,19 +19,16 @@ export function Root() {
         <nav>
           <ul>
             <li>
-              <Link to={`comandas?status=1`}>Comandas abertas</Link>
+              <Link to={`comandas`}>Comandas abertas</Link>
             </li>
             <li>
-              <Link to={`cozinha`}>Cozinha</Link>
+              <Link to={`pedidos`}>Cozinha</Link>
             </li>
             <li>
               <Link to={`produtos`}>Produtos</Link>
             </li>
             <li>
               <Link to={`clientes`}>Clientes</Link>
-            </li>
-            <li>
-              <Link to={`comandas-historico`}>Comandas historico</Link>
             </li>
           </ul>
         </nav>

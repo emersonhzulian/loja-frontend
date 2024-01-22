@@ -22,7 +22,7 @@ export async function action({ request, params }) {
   const api = Api.Instance;
   await api.productsUpdate(updatedEntity.id ?? 0, updatedEntity);
 
-  return redirect(`/produtos/${updatedEntity.id}`);
+  return redirect(`/produtos`);
 }
 
 export function ProductEdit() {
