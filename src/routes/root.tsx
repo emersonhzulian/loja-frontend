@@ -2,11 +2,7 @@ import { Outlet, Link, useNavigation } from "react-router-dom";
 
 export function Root() {
   const navigation = useNavigation();
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
+
   return (
     <>
       <div id="sidebar">

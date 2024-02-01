@@ -3,13 +3,14 @@ import { Api } from "../../apiClient/Api";
 import { OrderDTO } from "../../apiClient/data-contracts";
 import { OrderComponent } from "../../components/order/orderComponent";
 import BackButton from "../../components/backButton";
+import type { LoaderFunction } from "react-router";
 
-export async function loader({ params }): Promise<OrderDTO> {
-  const orderId = params.comandaId;
+export const loader: LoaderFunction = async ({ params }): Promise<OrderDTO> => {
+  const orderId = parseInt(params.comandaId ?? "");
   const api = Api.Instance;
   const order = (await api.ordersDetail(orderId)).data;
   return order;
-}
+};
 
 export function Order() {
   const order = useLoaderData() as OrderDTO;

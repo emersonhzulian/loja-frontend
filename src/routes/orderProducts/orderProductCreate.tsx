@@ -8,28 +8,28 @@ import {
 } from "../../apiClient/data-contracts";
 import { OrderProductCreateComponent } from "../../components/orderProduct/orderProductCreateComponent";
 import BackButton from "../../components/backButton";
+import type { ActionFunction, LoaderFunction } from "react-router";
 
-export async function loader({
-  request,
+export const loader: LoaderFunction = async ({
   params,
-}): Promise<{ products: ProductDTO[]; commandId: number }> {
+}): Promise<{ products: ProductDTO[]; commandId: number }> => {
   const api = Api.Instance;
   const products = (await api.productsList()).data;
   return { products, commandId: Number(params.comandaId) };
-}
+};
 
-export async function action({ request, params }) {
+export const action: ActionFunction = async ({ request, params }) => {
   const formData = await request.formData();
   const updates = Object.fromEntries(formData);
 
-  const commandId = params.comandaId;
+  const commandId = parseInt(params.comandaId ?? "");
   const productId = Number(updates.productId);
 
   let newEntity: OrderProductDTO = {
     orderId: commandId,
     productId: productId,
     price: Number(updates.price),
-    description: updates.description,
+    description: updates.description as string,
   };
   const api = Api.Instance;
   newEntity = (await api.orderProductsCreate(newEntity)).data;
@@ -37,13 +37,13 @@ export async function action({ request, params }) {
   if (Number(updates.productType) == EnumProductType.Kitchen) {
     let newEntityKitchen: KitchenOrderDTO = {
       orderProductId: newEntity.id,
-      description: updates.kitchenDescription,
+      description: updates.kitchenDescription as string,
     };
     (await api.kitchenOrdersCreate(newEntityKitchen)).data;
   }
 
   return redirect(`/comandas/${commandId}/produtos/`);
-}
+};
 
 export function OrderProductCreate() {
   const data = useLoaderData() as { products: ProductDTO[]; commandId: number };

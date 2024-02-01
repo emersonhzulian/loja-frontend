@@ -3,22 +3,23 @@ import { Api } from "../../apiClient/Api";
 import { ClientDTO } from "../../apiClient/data-contracts";
 import BackButton from "../../components/backButton";
 import { ClientCreateComponent } from "../../components/clients/clientCreateComponent";
+import type { ActionFunction, LoaderFunction } from "react-router";
 
-export async function loader({ request, params }): Promise<string> {
+export const loader: LoaderFunction = async ({ request }): Promise<string> => {
   const url = new URL(request.url);
   const nome = url.searchParams.get("nome") ?? "";
 
   return nome;
-}
+};
 
-export async function action({ request, params }) {
+export const action: ActionFunction = async ({ request }) => {
   const url = new URL(request.url);
   const nome = url.searchParams.get("nome") ?? "";
   const formData = await request.formData();
   const updates = Object.fromEntries(formData);
 
   let newEntity: ClientDTO = {
-    name: updates.name,
+    name: updates.name as string,
   };
 
   const api = Api.Instance;
@@ -30,7 +31,7 @@ export async function action({ request, params }) {
       ? `/comandas/criar?clienteId=${newEntity.id}`
       : `/clientes/${newEntity.id}`
   );
-}
+};
 
 export function ClientCreate() {
   const name = useLoaderData() as string;

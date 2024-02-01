@@ -32,7 +32,7 @@ export function KitchenOrderEditComponent({
         >
           {Object.keys(EnumKitchenOrderStatus)
             .filter((v) => !isNaN(Number(v)))
-            .map((key, index) => {
+            .map((key) => {
               return (
                 <option value={key} key={key}>
                   {EnumKitchenOrderStatusDescription(Number(key))}

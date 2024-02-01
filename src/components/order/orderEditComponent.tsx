@@ -16,7 +16,7 @@ export function OrderEditComponent({ order }: { order: OrderDTO }) {
         <select name="orderStatus" defaultValue={order.orderStatus}>
           {Object.keys(EnumOrderStatus)
             .filter((v) => !isNaN(Number(v)))
-            .map((key, index) => {
+            .map((key) => {
               return (
                 <option value={key} key={key}>
                   {EnumOrderStatusDescription(Number(key))}

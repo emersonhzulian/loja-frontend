@@ -1,19 +1,13 @@
-import {
-  Link,
-  useLoaderData,
-  Form,
-  useNavigation,
-  useSubmit,
-} from "react-router-dom";
+import { Link, useLoaderData, Form, useSubmit } from "react-router-dom";
 import { Api } from "../../apiClient/Api";
 import { EnumOrderStatus, OrderDTO } from "../../apiClient/data-contracts";
 import { OrderComponent } from "../../components/order/orderComponent";
 import { useEffect } from "react";
+import type { LoaderFunction } from "react-router";
 
-export async function loader({
+export const loader: LoaderFunction = async ({
   request,
-  params,
-}): Promise<{ orders: OrderDTO[]; status?: EnumOrderStatus }> {
+}): Promise<{ orders: OrderDTO[]; status?: EnumOrderStatus }> => {
   const url = new URL(request.url);
   let status = url.searchParams.get("status")
     ? Number(url.searchParams.get("status"))
@@ -28,14 +22,13 @@ export async function loader({
   const api = Api.Instance;
   const orders = (await api.ordersList({ EnumOrderStatus: status })).data;
   return { orders, status };
-}
+};
 
 export function Orders() {
   const data = useLoaderData() as {
     orders: OrderDTO[];
     status?: EnumOrderStatus;
   };
-  const navigation = useNavigation();
   const submit = useSubmit();
 
   const options = [
@@ -61,7 +54,7 @@ export function Orders() {
             submit(event.currentTarget.form);
           }}
         >
-          {options.map((key, index) => {
+          {options.map((key) => {
             return (
               <option value={key.value} key={key.value}>
                 {key.description}

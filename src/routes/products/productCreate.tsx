@@ -2,12 +2,13 @@ import { Form, redirect } from "react-router-dom";
 import { Api } from "../../apiClient/Api";
 import { ProductDTO } from "../../apiClient/data-contracts";
 import { ProductCreateComponent } from "../../components/product/productCreateComponent";
+import type { ActionFunction } from "react-router";
 
-export async function action({ request, params }) {
+export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const updates = Object.fromEntries(formData);
   let updatedEntity: ProductDTO = {
-    description: updates.description,
+    description: updates.description as string,
     suggestedPrice: Number(updates.suggestedPrice),
     productType: Number(updates.productType),
   };
@@ -17,7 +18,7 @@ export async function action({ request, params }) {
   updatedEntity = (await api.productsCreate(updatedEntity)).data;
 
   return redirect(`/produtos`);
-}
+};
 
 export function ProductCreate() {
   return (

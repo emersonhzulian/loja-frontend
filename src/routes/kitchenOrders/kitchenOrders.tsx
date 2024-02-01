@@ -5,11 +5,14 @@ import {
   KitchenOrderDTO,
 } from "../../apiClient/data-contracts";
 import { KitchenOrderComponent } from "../../components/kitchenOrders/kitchenOrderComponent";
+import type { LoaderFunction } from "react-router";
 
-export async function loader({ request }): Promise<{
+export const loader: LoaderFunction = async ({
+  request,
+}): Promise<{
   kitchenOrders: KitchenOrderDTO[];
   status?: EnumKitchenOrderStatus;
-}> {
+}> => {
   const url = new URL(request.url);
   let status = url.searchParams.get("status")
     ? Number(url.searchParams.get("status"))
@@ -28,7 +31,7 @@ export async function loader({ request }): Promise<{
     })
   ).data;
   return { kitchenOrders, status };
-}
+};
 
 export function KitchenOrders() {
   const data = useLoaderData() as {
@@ -55,7 +58,7 @@ export function KitchenOrders() {
             submit(event.currentTarget.form);
           }}
         >
-          {options.map((key, index) => {
+          {options.map((key) => {
             return (
               <option value={key.value} key={key.value}>
                 {key.description}

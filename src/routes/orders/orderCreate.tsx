@@ -7,11 +7,11 @@ import {
 } from "../../apiClient/data-contracts";
 import { OrderCreateComponent } from "../../components/order/orderCreateComponent";
 import BackButton from "../../components/backButton";
+import type { ActionFunction, LoaderFunction } from "react-router";
 
-export async function loader({
+export const loader: LoaderFunction = async ({
   request,
-  params,
-}): Promise<{ clients: ClientDTO[]; selectedId?: number }> {
+}): Promise<{ clients: ClientDTO[]; selectedId?: number }> => {
   const url = new URL(request.url);
   const search = Number(url.searchParams.get("clienteId"));
   let selectedId = search ? search : undefined;
@@ -21,9 +21,9 @@ export async function loader({
 
   if (!clients.find((x) => x.id == selectedId)) selectedId = undefined;
   return { clients, selectedId };
-}
+};
 
-export async function action({ request, params }) {
+export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const updates = Object.fromEntries(formData);
 
@@ -38,7 +38,7 @@ export async function action({ request, params }) {
   newEntity = (await api.ordersCreate(newEntity)).data;
 
   return redirect(`/comandas/${newEntity.id}`);
-}
+};
 
 export function OrderCreate() {
   const data = useLoaderData() as {

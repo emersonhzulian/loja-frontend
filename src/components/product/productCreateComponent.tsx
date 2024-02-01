@@ -16,7 +16,7 @@ export function ProductCreateComponent() {
         <select name="productType" defaultValue={EnumProductType.Store}>
           {Object.keys(EnumProductType)
             .filter((v) => !isNaN(Number(v)))
-            .map((key, index) => {
+            .map((key) => {
               return (
                 <option value={key} key={key}>
                   {EnumProductTypeDescription(Number(key))}

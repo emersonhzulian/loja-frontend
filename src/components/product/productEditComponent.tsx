@@ -27,7 +27,7 @@ export function ProductEditComponent({ product }: { product: ProductDTO }) {
         <select name="productType" defaultValue={product.productType}>
           {Object.keys(EnumProductType)
             .filter((v) => !isNaN(Number(v)))
-            .map((key, index) => {
+            .map((key) => {
               return (
                 <option value={key} key={key}>
                   {EnumProductTypeDescription(Number(key))}

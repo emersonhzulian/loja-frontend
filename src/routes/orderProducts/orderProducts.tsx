@@ -3,27 +3,30 @@ import { Api } from "../../apiClient/Api";
 import { OrderDTO, OrderProductDTO } from "../../apiClient/data-contracts";
 import { OrderProductComponent } from "../../components/orderProduct/orderProductComponent";
 import DeleteButton from "../../components/deleteButton";
+import type { ActionFunction, LoaderFunction } from "react-router";
 
-export async function loader({ request, params }): Promise<{
+export const loader: LoaderFunction = async ({
+  params,
+}): Promise<{
   order: OrderDTO;
   orderProducts: OrderProductDTO[];
-}> {
-  const commandId = params.comandaId;
+}> => {
+  const commandId = parseInt(params.comandaId ?? "");
   const api = Api.Instance;
   const order = (await api.ordersDetail(commandId)).data;
   const orderProducts = (
     await api.orderProductsList({ OrderId: commandId })
   ).data.reverse();
   return { order, orderProducts };
-}
+};
 
-export async function actionDelete({ params }) {
+export const actionDelete: ActionFunction = async ({ params }) => {
   const commandId = params.comandaId;
   const api = Api.Instance;
   await api.orderProductsDelete(Number(params.orderProductId));
 
   return redirect(`/comandas/${commandId}/produtos`);
-}
+};
 
 export function OrderProducts() {
   const data = useLoaderData() as {
