@@ -1,8 +1,6 @@
 import { useLoaderData, Form, redirect } from "react-router-dom";
 import { Api } from "../../apiClient/Api";
-import { KitchenOrderDTO, OrderDTO } from "../../apiClient/data-contracts";
-import { OrderComponent } from "../../components/order/orderComponent";
-import { OrderEditComponent } from "../../components/order/orderEditComponent";
+import { KitchenOrderDTO } from "../../apiClient/data-contracts";
 import BackButton from "../../components/backButton";
 import { KitchenOrderEditComponent } from "../../components/kitchenOrders/kitchenOrderEditComponent";
 

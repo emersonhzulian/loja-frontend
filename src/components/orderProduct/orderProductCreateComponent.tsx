@@ -1,9 +1,5 @@
-import { useEffect, useState } from "react";
-import {
-  ClientDTO,
-  EnumProductType,
-  ProductDTO,
-} from "../../apiClient/data-contracts";
+import { useState } from "react";
+import { EnumProductType, ProductDTO } from "../../apiClient/data-contracts";
 
 export function OrderProductCreateComponent({
   products,

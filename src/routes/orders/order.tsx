@@ -1,8 +1,7 @@
-import { useLoaderData, Form, redirect, Outlet, Link } from "react-router-dom";
+import { useLoaderData, Outlet } from "react-router-dom";
 import { Api } from "../../apiClient/Api";
 import { OrderDTO } from "../../apiClient/data-contracts";
 import { OrderComponent } from "../../components/order/orderComponent";
-import { OrderEditComponent } from "../../components/order/orderEditComponent";
 import BackButton from "../../components/backButton";
 
 export async function loader({ params }): Promise<OrderDTO> {

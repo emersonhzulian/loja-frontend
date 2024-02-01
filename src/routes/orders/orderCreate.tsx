@@ -8,10 +8,19 @@ import {
 import { OrderCreateComponent } from "../../components/order/orderCreateComponent";
 import BackButton from "../../components/backButton";
 
-export async function loader({ request, params }): Promise<ClientDTO[]> {
+export async function loader({
+  request,
+  params,
+}): Promise<{ clients: ClientDTO[]; selectedId?: number }> {
+  const url = new URL(request.url);
+  const search = Number(url.searchParams.get("clienteId"));
+  let selectedId = search ? search : undefined;
+
   const api = Api.Instance;
   const clients = (await api.clientsList()).data;
-  return clients;
+
+  if (!clients.find((x) => x.id == selectedId)) selectedId = undefined;
+  return { clients, selectedId };
 }
 
 export async function action({ request, params }) {
@@ -32,12 +41,18 @@ export async function action({ request, params }) {
 }
 
 export function OrderCreate() {
-  const clients = useLoaderData() as ClientDTO[];
+  const data = useLoaderData() as {
+    clients: ClientDTO[];
+    selectedId?: number;
+  };
 
   return (
     <>
       <Form method="post" id="order-form">
-        <OrderCreateComponent clients={clients} />
+        <OrderCreateComponent
+          clients={data.clients}
+          selectedId={data.selectedId}
+        />
         <button type="submit">Criar</button>
         <BackButton url="/comandas" />
       </Form>

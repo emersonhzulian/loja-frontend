@@ -8,10 +8,6 @@ import {
   loader as orderCreateLoader,
   action as orderCreateAction,
 } from "./routes/orders/orderCreate.tsx";
-import {
-  OrdersHistory,
-  loader as ordersHistoryLoader,
-} from "./routes/orders-history.tsx";
 import "./index.css";
 import {
   Products,

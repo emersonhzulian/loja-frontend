@@ -1,8 +1,5 @@
-import { KitchenOrderDTO, OrderDTO } from "../../apiClient/data-contracts";
-import {
-  EnumKitchenOrderStatusDescription,
-  EnumOrderStatusDescription,
-} from "../../apiClient/enum-descriptions";
+import { KitchenOrderDTO } from "../../apiClient/data-contracts";
+import { EnumKitchenOrderStatusDescription } from "../../apiClient/enum-descriptions";
 
 export function KitchenOrderComponent({
   order: kitchenOrder,

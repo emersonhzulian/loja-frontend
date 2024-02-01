@@ -1,11 +1,6 @@
 import { useLoaderData, Form, redirect } from "react-router-dom";
 import { Api } from "../../apiClient/Api";
-import {
-  ClientDTO,
-  EnumOrderStatus,
-  OrderDTO,
-} from "../../apiClient/data-contracts";
-import { OrderCreateComponent } from "../../components/order/orderCreateComponent";
+import { ClientDTO } from "../../apiClient/data-contracts";
 import BackButton from "../../components/backButton";
 import { ClientCreateComponent } from "../../components/clients/clientCreateComponent";
 
@@ -30,7 +25,11 @@ export async function action({ request, params }) {
 
   newEntity = (await api.clientsCreate(newEntity)).data;
 
-  return redirect(nome ? `/comandas/criar` : `/clientes/${newEntity.id}`);
+  return redirect(
+    nome
+      ? `/comandas/criar?clienteId=${newEntity.id}`
+      : `/clientes/${newEntity.id}`
+  );
 }
 
 export function ClientCreate() {

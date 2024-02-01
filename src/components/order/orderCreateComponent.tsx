@@ -1,12 +1,24 @@
-import { redirect } from "react-router-dom";
 import { ClientDTO } from "../../apiClient/data-contracts";
 import Creatable from "react-select/creatable";
 
-export function OrderCreateComponent({ clients }: { clients: ClientDTO[] }) {
+import { useNavigate } from "react-router-dom";
+
+export function OrderCreateComponent({
+  clients,
+  selectedId,
+}: {
+  clients: ClientDTO[];
+  selectedId?: number;
+}) {
+  let navigate = useNavigate();
   const options = clients.map((x) => ({
     value: x.id,
     label: x.name,
   }));
+
+  const selected = selectedId
+    ? options.find((x) => x.value == selectedId)
+    : undefined;
 
   return (
     <>
@@ -14,12 +26,17 @@ export function OrderCreateComponent({ clients }: { clients: ClientDTO[] }) {
         Cliente:{" "}
         <Creatable
           placeholder="Selecione"
+          defaultValue={
+            selected
+              ? { value: selected.value, label: selected.label }
+              : undefined
+          }
           formatCreateLabel={(inputText) => `Criar ${inputText}`}
           isClearable
           name="clientId"
           options={options}
           onCreateOption={(inputText) =>
-            (window.location.href = `/clientes/criar?nome=${inputText}`)
+            navigate(`/clientes/criar?nome=${inputText}`)
           }
         />
         <br></br>

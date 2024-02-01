@@ -1,7 +1,6 @@
 import { useLoaderData, Form, redirect } from "react-router-dom";
 import { Api } from "../../apiClient/Api";
 import { OrderDTO } from "../../apiClient/data-contracts";
-import { OrderComponent } from "../../components/order/orderComponent";
 import { OrderEditComponent } from "../../components/order/orderEditComponent";
 import BackButton from "../../components/backButton";
 

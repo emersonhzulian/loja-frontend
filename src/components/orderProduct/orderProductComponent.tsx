@@ -1,15 +1,5 @@
-import {
-  ClientDTO,
-  EnumOrderStatus,
-  EnumProductType,
-  OrderDTO,
-  OrderProductDTO,
-  ProductDTO,
-} from "../../apiClient/data-contracts";
-import {
-  EnumOrderStatusDescription,
-  EnumProductTypeDescription,
-} from "../../apiClient/enum-descriptions";
+import { OrderProductDTO } from "../../apiClient/data-contracts";
+import { EnumProductTypeDescription } from "../../apiClient/enum-descriptions";
 
 export function OrderProductComponent({
   orderProduct,

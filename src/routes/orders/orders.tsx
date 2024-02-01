@@ -2,18 +2,12 @@ import {
   Link,
   useLoaderData,
   Form,
-  redirect,
   useNavigation,
   useSubmit,
 } from "react-router-dom";
 import { Api } from "../../apiClient/Api";
-import {
-  ClientDTO,
-  EnumOrderStatus,
-  OrderDTO,
-} from "../../apiClient/data-contracts";
+import { EnumOrderStatus, OrderDTO } from "../../apiClient/data-contracts";
 import { OrderComponent } from "../../components/order/orderComponent";
-import { EnumOrderStatusDescription } from "../../apiClient/enum-descriptions";
 import { useEffect } from "react";
 
 export async function loader({

@@ -1,8 +1,4 @@
 import { Outlet, Link, useNavigation } from "react-router-dom";
-import {
-  EnumKitchenOrderStatus,
-  EnumOrderStatus,
-} from "../apiClient/data-contracts";
 
 export function Root() {
   const navigation = useNavigation();

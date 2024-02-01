@@ -1,7 +1,6 @@
-import { useLoaderData, Form, redirect } from "react-router-dom";
+import { Form, redirect } from "react-router-dom";
 import { Api } from "../../apiClient/Api";
 import { ProductDTO } from "../../apiClient/data-contracts";
-import { ProductComponent } from "../../components/product/productComponent";
 import { ProductCreateComponent } from "../../components/product/productCreateComponent";
 
 export async function action({ request, params }) {

@@ -1,11 +1,6 @@
-import { Form, Link, Outlet, redirect, useLoaderData } from "react-router-dom";
+import { Link, Outlet, redirect, useLoaderData } from "react-router-dom";
 import { Api } from "../../apiClient/Api";
-import {
-  OrderDTO,
-  OrderProductDTO,
-  ProductDTO,
-} from "../../apiClient/data-contracts";
-import { OrderComponent } from "../../components/order/orderComponent";
+import { OrderDTO, OrderProductDTO } from "../../apiClient/data-contracts";
 import { OrderProductComponent } from "../../components/orderProduct/orderProductComponent";
 import DeleteButton from "../../components/deleteButton";
 

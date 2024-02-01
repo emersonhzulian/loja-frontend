@@ -4,9 +4,7 @@ import {
   EnumKitchenOrderStatus,
   KitchenOrderDTO,
 } from "../../apiClient/data-contracts";
-import { OrderComponent } from "../../components/order/orderComponent";
 import { KitchenOrderComponent } from "../../components/kitchenOrders/kitchenOrderComponent";
-import { EnumKitchenOrderStatusDescription } from "../../apiClient/enum-descriptions";
 
 export async function loader({ request }): Promise<{
   kitchenOrders: KitchenOrderDTO[];

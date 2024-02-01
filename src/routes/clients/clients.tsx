@@ -1,4 +1,4 @@
-import { Link, redirect, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { Api } from "../../apiClient/Api";
 import { ClientDTO } from "../../apiClient/data-contracts";
 import { ClientComponent } from "../../components/clients/clientComponent";
