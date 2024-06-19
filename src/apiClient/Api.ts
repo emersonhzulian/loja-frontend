@@ -32,7 +32,7 @@ export class Api<
   private static _instance: Api;
 
   private constructor() {
-    super({ baseUrl: "http://localhost:5000" });
+    super({ baseUrl: "http://localhost:5800" });
   }
 
   public static get Instance() {
